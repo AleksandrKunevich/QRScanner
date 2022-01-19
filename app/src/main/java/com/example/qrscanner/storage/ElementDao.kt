@@ -7,12 +7,13 @@ import androidx.room.Query
 
 @Dao
 interface ElementDao {
+
     @Query("SELECT * FROM room")
-    fun getAll(): List<ElementEntity>
+    suspend fun getAll(): List<ElementEntity>
 
     @Insert
-    fun insertEntity(elementEntity: ElementEntity)
+    suspend fun insertEntity(elementEntity: ElementEntity)
 
     @Delete
-    fun deleteEntity(elementEntity: ElementEntity)
+    suspend fun deleteEntity(elementEntity: ElementEntity)
 }

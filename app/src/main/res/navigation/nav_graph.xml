@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_scannerFragment_to_cameraFragment"
             app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_scannerFragment_to_roomFragment"
+            app:destination="@id/roomFragment" />
     </fragment>
     <fragment
         android:id="@+id/cameraFragment"
@@ -22,5 +25,13 @@
         <action
             android:id="@+id/action_cameraFragment_to_scannerFragment"
             app:destination="@id/scannerFragment" />
+        <action
+            android:id="@+id/action_cameraFragment_to_roomFragment"
+            app:destination="@id/roomFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/roomFragment"
+        android:name="com.example.qrscanner.RoomFragment"
+        android:label="fragment_room"
+        tools:layout="@layout/fragment_room" />
 </navigation>

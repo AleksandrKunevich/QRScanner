@@ -12,6 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".DaggerApplication"
         android:theme="@style/Theme.QRScanner">
         <activity
             android:name=".presentation.MainActivity"

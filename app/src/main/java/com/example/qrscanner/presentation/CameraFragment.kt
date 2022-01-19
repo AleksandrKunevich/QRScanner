@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +21,11 @@ import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.qrscanner.R
 import com.example.qrscanner.databinding.FragmentCameraBinding
+import com.example.qrscanner.domain.ElementViewModel
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -30,10 +35,17 @@ private const val GALLERY_REQUEST_CODE = 20000002
 
 class CameraFragment : Fragment() {
 
+    init {
+        com.example.qrscanner.DaggerApplication.appComponent?.inject(this)
+    }
+
+    private val viewModel: ElementViewModel by viewModels()
+
     private lateinit var binding: FragmentCameraBinding
     private val btnCamera: Button by lazy { binding.btnCamera }
     private val btnGallery: Button by lazy { binding.btnGallery }
     private val btnImageView: ImageView by lazy { binding.imageView }
+    private val btnRoom: Button by lazy { binding.btnRoom }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +65,7 @@ class CameraFragment : Fragment() {
 //            startActivity(Intent(Settings.ACTION_APPLICATION_SETTINGS))
 //        }
 
-       checkPermission(
+        checkPermission(
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Settings.ACTION_INTERNAL_STORAGE_SETTINGS
         )
@@ -75,6 +87,9 @@ class CameraFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        viewModel.getAll()
+        Log.d("!!!!!", "onStart: ${viewModel.element.value?.size}")
 
         btnCamera.setOnClickListener {
             goCamera()
@@ -98,6 +113,10 @@ class CameraFragment : Fragment() {
                 }
             }
             pictureDialog.show()
+        }
+
+        btnRoom.setOnClickListener {
+            findNavController().navigate(R.id.action_cameraFragment_to_roomFragment)
         }
     }
 

@@ -24,6 +24,7 @@ class ScannerFragment : Fragment() {
     private lateinit var imageView: ImageView
     private lateinit var txtView: TextView
     private lateinit var btnScan: Button
+    private lateinit var btnRoom: Button
     private lateinit var btnCamera: Button
 
     override fun onCreateView(
@@ -32,16 +33,17 @@ class ScannerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentScannerBinding.inflate(inflater, container, false)
+        imageView = binding.imgView
+        txtView = binding.txtContent
+        btnScan = binding.btnScan
+        btnCamera = binding.btnCamera
+        btnRoom = binding.btnRoom
         return binding.root
     }
 
     override fun onStart() {
         super.onStart()
 
-        imageView = binding.imgView
-        txtView = binding.txtContent
-        btnScan = binding.btnScan
-        btnCamera = binding.btnCamera
 
         val myBitmap = BitmapFactory.decodeResource(
             requireContext().resources,
@@ -67,6 +69,10 @@ class ScannerFragment : Fragment() {
 
         btnCamera.setOnClickListener {
             findNavController().navigate(R.id.action_scannerFragment_to_cameraFragment)
+        }
+
+        btnRoom.setOnClickListener {
+            findNavController().navigate(R.id.action_scannerFragment_to_roomFragment)
         }
     }
 }
