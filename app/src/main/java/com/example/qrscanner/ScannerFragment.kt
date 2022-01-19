@@ -50,7 +50,7 @@ class ScannerFragment : Fragment() {
 
         val barcodeDetector = BarcodeDetector.Builder(requireContext())
             .setBarcodeFormats(Barcode.QR_CODE)
-            .build();
+            .build()
 
         btnScan.setOnClickListener {
             if (!barcodeDetector.isOperational) {
@@ -60,11 +60,9 @@ class ScannerFragment : Fragment() {
             val barcodes: SparseArray<Barcode> = barcodeDetector.detect(frame);
             if (barcodes.isNotEmpty()) {
                 val thisCode = barcodes.valueAt(0)
-//                txtView.text = thisCode.rawValue
                 txtView.text = thisCode?.displayValue ?: "Empty..."
             }
         }
-
 
         btnCamera.setOnClickListener {
             findNavController().navigate(R.id.action_scannerFragment_to_cameraFragment)

@@ -46,7 +46,11 @@ class CameraFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        checkPermission()
+        checkPermission(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Settings.ACTION_INTERNAL_STORAGE_SETTINGS
+        )
+        checkPermission(Manifest.permission.CAMERA, Settings.ACTION_APPLICATION_SETTINGS)
 //        val startForResult =
 //            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
 //            { result: ActivityResult ->
@@ -87,38 +91,6 @@ class CameraFragment : Fragment() {
         }
     }
 
-    private fun checkPermission() {
-
-        val permissionLauncherStorage = registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted ->
-            if (!isGranted) {
-                startActivity(Intent(Settings.ACTION_INTERNAL_STORAGE_SETTINGS))
-            }
-        }
-
-        val permissionLauncherCamera = registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted ->
-            if (!isGranted) {
-                startActivity(Intent(Settings.ACTION_APPLICATION_SETTINGS))
-            }
-        }
-        permissionLauncherStorage.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-        permissionLauncherCamera.launch(Manifest.permission.CAMERA)
-    }
-
-    private fun goGallery() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, GALLERY_REQUEST_CODE)
-    }
-
-    private fun goCamera() {
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(intent, CAMERA_REQUEST_CODE)
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -134,6 +106,29 @@ class CameraFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun checkPermission(manifest: String, settings: String) {
+
+        val permissionLauncherStorage = registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted ->
+            if (!isGranted) {
+                startActivity(Intent(settings))
+            }
+        }
+        permissionLauncherStorage.launch(manifest)
+    }
+
+    private fun goGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, GALLERY_REQUEST_CODE)
+    }
+
+    private fun goCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent, CAMERA_REQUEST_CODE)
     }
 
     private fun saveBitmapInStorage(bitmap: Bitmap, context: Context) {
