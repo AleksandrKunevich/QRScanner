@@ -1,4 +1,4 @@
-package com.example.qrscanner
+package com.example.qrscanner.presentation
 
 import android.Manifest
 import android.app.Activity
@@ -46,11 +46,21 @@ class CameraFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        checkPermission(
+
+//        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) !=
+//            PackageManager.PERMISSION_GRANTED
+//        ) {
+//            startActivity(Intent(Settings.ACTION_APPLICATION_SETTINGS))
+//        }
+
+       checkPermission(
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Settings.ACTION_INTERNAL_STORAGE_SETTINGS
         )
-        checkPermission(Manifest.permission.CAMERA, Settings.ACTION_APPLICATION_SETTINGS)
+        checkPermission(
+            Manifest.permission.CAMERA,
+            Settings.ACTION_APPLICATION_SETTINGS
+        )
 //        val startForResult =
 //            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
 //            { result: ActivityResult ->

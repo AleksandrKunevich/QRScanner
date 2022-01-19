@@ -1,4 +1,4 @@
-package com.example.qrscanner
+package com.example.qrscanner.presentation
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.core.util.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.qrscanner.R
 import com.example.qrscanner.databinding.FragmentScannerBinding
 import com.google.android.gms.vision.Frame
 import com.google.android.gms.vision.barcode.Barcode
@@ -49,7 +50,7 @@ class ScannerFragment : Fragment() {
         imageView.setImageBitmap(myBitmap);
 
         val barcodeDetector = BarcodeDetector.Builder(requireContext())
-            .setBarcodeFormats(Barcode.QR_CODE)
+            .setBarcodeFormats(Barcode.ALL_FORMATS)
             .build()
 
         btnScan.setOnClickListener {
