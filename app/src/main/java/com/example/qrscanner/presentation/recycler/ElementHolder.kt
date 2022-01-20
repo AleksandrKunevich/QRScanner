@@ -11,14 +11,18 @@ import com.example.qrscanner.storage.ElementEntity
 
 class ElementHolder private constructor(
     itemView: View,
+    private val listener: ElementClickListener
 ) : RecyclerView.ViewHolder(itemView) {
 
     companion object {
-        fun from(parentViewGroup: ViewGroup): ElementHolder {
+        fun from(
+            parentViewGroup: ViewGroup, listener: ElementClickListener
+        ): ElementHolder {
             return ElementHolder(
                 LayoutInflater
                     .from(parentViewGroup.context)
                     .inflate(R.layout.item_element, parentViewGroup, false),
+                listener
             )
         }
     }
@@ -33,5 +37,9 @@ class ElementHolder private constructor(
         txtCount.text = (adapterPosition + 1).toString()
         txtDate.text = item.date.toString()
         txtTime.text = item.time.toString()
+
+        image.setOnClickListener {
+            listener.onItemClickListener(adapterPosition)
+        }
     }
 }

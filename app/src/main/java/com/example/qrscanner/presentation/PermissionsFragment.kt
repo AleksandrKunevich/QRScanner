@@ -11,7 +11,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.qrscanner.R
 
 private const val PERMISSIONS_REQUEST_CODE = 10
-private val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.CAMERA)
+private val permissions =
+    arrayOf(
+        Manifest.permission.CAMERA,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
 class PermissionsFragment : Fragment() {
 
@@ -21,7 +25,7 @@ class PermissionsFragment : Fragment() {
         if (hasPermissions(requireContext())) {
             findNavController().navigate(R.id.action_permissionsFragment_to_realtimeScannerFragment)
         } else {
-            requestPermissions(PERMISSIONS_REQUIRED, PERMISSIONS_REQUEST_CODE)
+            requestPermissions(permissions, PERMISSIONS_REQUEST_CODE)
         }
     }
 
@@ -29,16 +33,24 @@ class PermissionsFragment : Fragment() {
         requestCode: Int, permissions: Array<String>, grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PERMISSIONS_REQUEST_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                findNavController().navigate(R.id.action_permissionsFragment_to_realtimeScannerFragment)
-            } else {
-                Toast.makeText(context, "Permission request denied", Toast.LENGTH_LONG).show()
-            }
+        if (hasPermissions(requireContext())) {
+            findNavController().navigate(R.id.action_permissionsFragment_to_realtimeScannerFragment)
+        } else {
+            Toast.makeText(context, "Permission request denied", Toast.LENGTH_LONG).show()
+            activity?.finish()
         }
     }
 
-    private fun hasPermissions(context: Context) = PERMISSIONS_REQUIRED.all {
-        ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
+    private fun hasPermissions(context: Context): Boolean {
+        permissions.forEach { manifest ->
+            if (ContextCompat.checkSelfPermission(
+                    context,
+                    manifest
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return false
+            }
+        }
+        return true
     }
 }

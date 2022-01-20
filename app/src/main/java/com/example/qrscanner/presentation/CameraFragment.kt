@@ -1,18 +1,15 @@
 package com.example.qrscanner.presentation
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -30,6 +27,7 @@ class CameraFragment : Fragment() {
     private val btnGallery: Button by lazy { binding.btnGallery }
     private val imgView: ImageView by lazy { binding.imageView }
     private val btnRoom: Button by lazy { binding.btnRoom }
+    private val btnRealtime: Button by lazy { binding.btnRealtime }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,19 +36,6 @@ class CameraFragment : Fragment() {
     ): View {
         binding = FragmentCameraBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        checkPermission(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Settings.ACTION_INTERNAL_STORAGE_SETTINGS
-        )
-        checkPermission(
-            Manifest.permission.CAMERA,
-            Settings.ACTION_APPLICATION_SETTINGS
-        )
     }
 
     override fun onStart() {
@@ -62,6 +47,10 @@ class CameraFragment : Fragment() {
 
         btnGallery.setOnClickListener {
             goGallery()
+        }
+
+        btnRealtime.setOnClickListener {
+            findNavController().navigate(R.id.action_cameraFragment_to_realtimeScannerFragment)
         }
 
         imgView.setOnClickListener {
@@ -100,18 +89,6 @@ class CameraFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun checkPermission(manifest: String, settings: String) {
-
-        val permissionLauncherStorage = registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted ->
-            if (!isGranted) {
-                startActivity(Intent(settings))
-            }
-        }
-        permissionLauncherStorage.launch(manifest)
     }
 
     private fun goGallery() {

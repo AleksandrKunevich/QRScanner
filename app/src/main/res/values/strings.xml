@@ -7,5 +7,8 @@
     <string name="take_picture">take picture</string>
     <string name="scanning">Scanning...</string>
     <string name="room">room</string>
+    <string name="empty">Empty...</string>
+    <string name="realtime">real time</string>
     <string name="load">Load</string>
+    <string name="not_scanning">Not scanning</string>
 </resources>

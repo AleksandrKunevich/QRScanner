@@ -28,12 +28,26 @@
         <action
             android:id="@+id/action_cameraFragment_to_roomFragment"
             app:destination="@id/roomFragment" />
+        <action
+            android:id="@+id/action_cameraFragment_to_realtimeScannerFragment"
+            app:destination="@id/realtimeScannerFragment" />
     </fragment>
     <fragment
         android:id="@+id/roomFragment"
         android:name="com.example.qrscanner.presentation.RoomFragment"
         android:label="fragment_room"
-        tools:layout="@layout/fragment_room" />
+        tools:layout="@layout/fragment_room" >
+        <action
+            android:id="@+id/action_roomFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
+        <argument
+            android:name="positionAdapter"
+            android:defaultValue="-1"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_roomFragment_to_realtimeScannerFragment"
+            app:destination="@id/realtimeScannerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/realtimeScannerFragment"
         android:name="com.example.qrscanner.presentation.RealtimeScannerFragment"

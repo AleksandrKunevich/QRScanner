@@ -10,7 +10,7 @@
         android:id="@+id/recyclerElement"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnLoad"
+        app:layout_constraintBottom_toTopOf="@+id/btnRealtimeScan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,12 +21,12 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <Button
-        android:id="@+id/btnLoad"
+        android:id="@+id/btnRealtimeScan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/minimum_dimen_8dp"
         android:padding="@dimen/minimum_dimen_8dp"
-        android:text="@string/load"
+        android:text="@string/realtime"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

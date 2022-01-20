@@ -1,5 +1,21 @@
 package com.example.qrscanner.test
 
+import android.content.Intent
+import androidx.activity.result.contract.ActivityResultContracts
+
+//private fun checkPermission(manifest: String, settings: String) {
+//
+//    val permissionLauncherStorage = registerForActivityResult(
+//        ActivityResultContracts.RequestPermission()
+//    ) { isGranted ->
+//        if (!isGranted) {
+//            startActivity(Intent(settings))
+//        }
+//    }
+//    permissionLauncherStorage.launch(manifest)
+//}
+
+
 //        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) !=
 //            PackageManager.PERMISSION_GRANTED
 //        ) {

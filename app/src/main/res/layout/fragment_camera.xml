@@ -66,6 +66,19 @@
         android:padding="@dimen/minimum_dimen_8dp"
         android:text="@string/room"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnRealtime"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnRealtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/minimum_dimen_8dp"
+        android:padding="@dimen/minimum_dimen_8dp"
+        android:text="@string/realtime"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnRoom" />
 </androidx.constraintlayout.widget.ConstraintLayout>

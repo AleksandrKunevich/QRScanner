@@ -11,8 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/minimum_dimen_8dp"
+        android:gravity="center"
         android:padding="@dimen/minimum_dimen_8dp"
-        android:text=""
+        android:text="@string/not_scanning"
         android:textSize="@dimen/minimum_text_size_18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,8 +21,8 @@
 
     <ImageView
         android:id="@+id/imgScanner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="@dimen/minimum_dimen_8dp"
         android:padding="@dimen/minimum_dimen_8dp"
         app:layout_constraintBottom_toTopOf="@id/btnScan"
