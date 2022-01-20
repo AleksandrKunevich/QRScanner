@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/scannerFragment">
+    app:startDestination="@id/realtimeScannerFragment">
 
     <fragment
         android:id="@+id/scannerFragment"
@@ -34,4 +34,9 @@
         android:name="com.example.qrscanner.presentation.RoomFragment"
         android:label="fragment_room"
         tools:layout="@layout/fragment_room" />
+    <fragment
+        android:id="@+id/realtimeScannerFragment"
+        android:name="com.example.qrscanner.presentation.RealtimeScannerFragment"
+        android:label="realtime_scanner"
+        tools:layout="@layout/realtime_scanner" />
 </navigation>

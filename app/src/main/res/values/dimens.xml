@@ -2,4 +2,5 @@
 <resources>
     <dimen name="minimum_dimen_8dp">8dp</dimen>
     <dimen name="minimum_text_size_18sp">18sp</dimen>
+    <dimen name="minimum_text_size_28sp">28sp</dimen>
 </resources>
