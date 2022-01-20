@@ -1,7 +1,7 @@
 package com.example.qrscanner.di
 
 import android.content.Context
-import com.example.qrscanner.RoomFragment
+import com.example.qrscanner.presentation.RoomFragment
 import com.example.qrscanner.presentation.CameraFragment
 import com.example.qrscanner.presentation.MainActivity
 import com.example.qrscanner.presentation.ScannerFragment

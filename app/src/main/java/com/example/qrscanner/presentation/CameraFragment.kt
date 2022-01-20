@@ -12,7 +12,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,9 +25,11 @@ import com.example.qrscanner.DaggerApplication
 import com.example.qrscanner.R
 import com.example.qrscanner.databinding.FragmentCameraBinding
 import com.example.qrscanner.domain.ElementViewModel
+import com.example.qrscanner.storage.ElementEntity
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
+import java.util.*
 import javax.inject.Inject
 
 private const val CAMERA_REQUEST_CODE = 10000001
@@ -46,7 +47,7 @@ class CameraFragment : Fragment() {
     private lateinit var binding: FragmentCameraBinding
     private val btnCamera: Button by lazy { binding.btnCamera }
     private val btnGallery: Button by lazy { binding.btnGallery }
-    private val btnImageView: ImageView by lazy { binding.imageView }
+    private val imgView: ImageView by lazy { binding.imageView }
     private val btnRoom: Button by lazy { binding.btnRoom }
 
     override fun onCreateView(
@@ -90,9 +91,6 @@ class CameraFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        viewModel.getAll()
-        Log.d("!!!!!", "onStart: ${viewModel.element.value}")
-
         btnCamera.setOnClickListener {
             goCamera()
         }
@@ -101,7 +99,7 @@ class CameraFragment : Fragment() {
             goGallery()
         }
 
-        btnImageView.setOnClickListener {
+        imgView.setOnClickListener {
             val pictureDialog = AlertDialog.Builder(requireContext())
             pictureDialog.setTitle("Select Action")
             val pictureDialogItem = arrayOf(
@@ -130,6 +128,14 @@ class CameraFragment : Fragment() {
                 CAMERA_REQUEST_CODE -> {
                     val bitmap = data?.extras?.get("data") as Bitmap
                     saveBitmapInStorage(bitmap, requireContext())
+                    viewModel.inset(
+                        ElementEntity(
+                            UUID.randomUUID(),
+                            bitmap,
+                            Date(),
+                            System.currentTimeMillis()
+                        )
+                    )
                     binding.imageView.setImageBitmap(bitmap)
                 }
                 GALLERY_REQUEST_CODE -> {

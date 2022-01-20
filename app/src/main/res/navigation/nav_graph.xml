@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/roomFragment"
-        android:name="com.example.qrscanner.RoomFragment"
+        android:name="com.example.qrscanner.presentation.RoomFragment"
         android:label="fragment_room"
         tools:layout="@layout/fragment_room" />
 </navigation>
