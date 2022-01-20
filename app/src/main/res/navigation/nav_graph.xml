@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/realtimeScannerFragment">
+    app:startDestination="@id/permissionsFragment">
 
     <fragment
         android:id="@+id/scannerFragment"
@@ -39,4 +39,12 @@
         android:name="com.example.qrscanner.presentation.RealtimeScannerFragment"
         android:label="realtime_scanner"
         tools:layout="@layout/realtime_scanner" />
+    <fragment
+        android:id="@+id/permissionsFragment"
+        android:name="com.example.qrscanner.presentation.PermissionsFragment"
+        android:label="PermissionsFragment" >
+        <action
+            android:id="@+id/action_permissionsFragment_to_realtimeScannerFragment"
+            app:destination="@id/realtimeScannerFragment" />
+    </fragment>
 </navigation>

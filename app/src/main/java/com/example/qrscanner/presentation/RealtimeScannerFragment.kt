@@ -2,37 +2,34 @@ package com.example.qrscanner.presentation
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.provider.Settings
 import android.util.SparseArray
 import android.view.*
+import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.util.isNotEmpty
 import androidx.fragment.app.Fragment
 import com.example.qrscanner.R
 import com.example.qrscanner.databinding.RealtimeScannerBinding
+import com.example.qrscanner.utils.SaveBitmap
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
-import java.io.File
 
 private const val CODE_CAMERA = 10000001
 
 class RealtimeScannerFragment : Fragment() {
 
     private val surfaceView: SurfaceView by lazy { binding.surfaceView }
+    private val btnTakePicture: Button by lazy { binding.btnTakePicture }
     private val txtValue: TextView by lazy { binding.txtValue }
     private lateinit var binding: RealtimeScannerBinding
     private lateinit var detector: BarcodeDetector
     private lateinit var cameraSource: CameraSource
-    private lateinit var photoFile: File
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,58 +37,14 @@ class RealtimeScannerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = RealtimeScannerBinding.inflate(inflater, container, false)
+        setupControls()
         return binding.root
-    }
-
-    private fun checkPermission(manifest: String, settings: String) {
-
-        val permissionLauncherStorage = registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted ->
-            if (!isGranted) {
-                startActivity(Intent(settings))
-            }
-        }
-        permissionLauncherStorage.launch(manifest)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        checkPermission(
-            Manifest.permission.CAMERA,
-            Settings.ACTION_APPLICATION_SETTINGS
-        )
-
-        if (ContextCompat.checkSelfPermission(
-                context!!,
-                Manifest.permission.CAMERA
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            askForCameraPermission()
-        } else {
-
-        }
     }
 
     override fun onStart() {
         super.onStart()
-        setupControls()
-        Toast.makeText(context, "!!!!!!!!!!!", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == CODE_CAMERA && grantResults.isNotEmpty()) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                setupControls()
-            } else {
-                Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
-            }
+        btnTakePicture.setOnClickListener {
+            takeImage()
         }
     }
 
@@ -114,13 +67,7 @@ class RealtimeScannerFragment : Fragment() {
     private val surfaceCallBack = object : SurfaceHolder.Callback {
         @SuppressLint("MissingPermission")
         override fun surfaceCreated(holder: SurfaceHolder) {
-            try {
-                cameraSource.start(holder)
-            } catch (
-                e: Exception
-            ) {
-                Toast.makeText(context, "$e", Toast.LENGTH_SHORT).show()
-            }
+            cameraSource.start(holder)
         }
 
         override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
@@ -131,7 +78,6 @@ class RealtimeScannerFragment : Fragment() {
         override fun surfaceDestroyed(holder: SurfaceHolder) {
             cameraSource.stop()
         }
-
     }
 
     private fun setupControls() {
@@ -148,5 +94,12 @@ class RealtimeScannerFragment : Fragment() {
             arrayOf(Manifest.permission.CAMERA),
             CODE_CAMERA
         )
+    }
+
+    private fun takeImage() {
+        cameraSource.takePicture(null, { bytes ->
+            val bitmap: Bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+            SaveBitmap().saveBitmapInStorage(bitmap, requireContext())
+        })
     }
 }
