@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.media.MediaRecorder
 import android.os.Bundle
 import android.provider.Settings
 import android.util.SparseArray
@@ -16,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.util.isNotEmpty
 import androidx.fragment.app.Fragment
+import com.example.qrscanner.R
 import com.example.qrscanner.databinding.RealtimeScannerBinding
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
@@ -32,7 +32,6 @@ class RealtimeScannerFragment : Fragment() {
     private lateinit var binding: RealtimeScannerBinding
     private lateinit var detector: BarcodeDetector
     private lateinit var cameraSource: CameraSource
-    private lateinit var mediaRecorder: MediaRecorder
     private lateinit var photoFile: File
 
     override fun onCreateView(
@@ -65,15 +64,20 @@ class RealtimeScannerFragment : Fragment() {
         )
 
         if (ContextCompat.checkSelfPermission(
-                requireContext(),
+                context!!,
                 Manifest.permission.CAMERA
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             askForCameraPermission()
         } else {
-            setupControls()
-        }
 
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setupControls()
+        Toast.makeText(context, "!!!!!!!!!!!", Toast.LENGTH_SHORT).show()
     }
 
     override fun onRequestPermissionsResult(
@@ -86,7 +90,7 @@ class RealtimeScannerFragment : Fragment() {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 setupControls()
             } else {
-                Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -101,38 +105,39 @@ class RealtimeScannerFragment : Fragment() {
                 val qrCode: SparseArray<Barcode> = detections.detectedItems
                 val code = qrCode.valueAt(0)
                 txtValue.text = code.displayValue
+            } else {
+                txtValue.text = resources.getString(R.string.scanning)
             }
         }
-
     }
 
     private val surfaceCallBack = object : SurfaceHolder.Callback {
-        override fun surfaceCreated(holder: SurfaceHolder) {
-
-        }
-
-        override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
-            cameraSource.stop()
-        }
-
         @SuppressLint("MissingPermission")
-        override fun surfaceDestroyed(holder: SurfaceHolder) {
+        override fun surfaceCreated(holder: SurfaceHolder) {
             try {
                 cameraSource.start(holder)
             } catch (
                 e: Exception
             ) {
-                Toast.makeText(requireContext(), "$e", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "$e", Toast.LENGTH_SHORT).show()
             }
+        }
 
+        override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
+
+        }
+
+        @SuppressLint("MissingPermission")
+        override fun surfaceDestroyed(holder: SurfaceHolder) {
+            cameraSource.stop()
         }
 
     }
 
     private fun setupControls() {
-        detector = BarcodeDetector.Builder(requireContext()).build()
+        detector = BarcodeDetector.Builder(context).build()
         cameraSource =
-            CameraSource.Builder(requireContext(), detector).setAutoFocusEnabled(true).build()
+            CameraSource.Builder(context, detector).setAutoFocusEnabled(true).build()
         surfaceView.holder.addCallback(surfaceCallBack)
         detector.setProcessor(processor)
     }
@@ -145,34 +150,3 @@ class RealtimeScannerFragment : Fragment() {
         )
     }
 }
-
-//        val pictures: File = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-//        photoFile = File(pictures, "myPhoto.jpg");
-//
-//        val holder: SurfaceHolder = surfaceView.holder
-//        holder.addCallback(object : SurfaceHolder.Callback {
-//            override fun surfaceCreated(holder: SurfaceHolder) {
-//                try {
-//                    camera = CameraSource.Builder(
-//                        requireContext(),
-//                        BarcodeDetector.Builder(requireContext()).build()
-//                    )
-//                        .setAutoFocusEnabled(true)
-//                        .build()
-//                    surfaceView.display
-//                } catch (e: Exception) {
-//                    e.printStackTrace()
-//                }
-//            }
-//
-//            override fun surfaceChanged(
-//                holder: SurfaceHolder,
-//                format: Int,
-//                width: Int,
-//                height: Int
-//            ) {
-//            }
-//
-//            override fun surfaceDestroyed(holder: SurfaceHolder) {
-//            }
-//        })
