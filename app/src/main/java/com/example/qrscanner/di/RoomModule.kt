@@ -7,34 +7,27 @@ import com.example.qrscanner.storage.AppDataBaseRoom
 import com.example.qrscanner.storage.ElementDao
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 object RoomModule {
 
-    @Singleton
     @Provides
-    fun provideDataBaseRoom(app: Context): AppDataBaseRoom =
+    fun provideDataBaseRoom(context: Context): AppDataBaseRoom =
         Room.databaseBuilder(
-            app,
+            context,
             AppDataBaseRoom::class.java,
             "room"
         ).build()
 
-    @Singleton
     @Provides
     fun provideElementDao(database: AppDataBaseRoom): ElementDao =
         database.getElementDao()
 
-    @Singleton
     @Provides
     fun provideElementInteractorImpl(interactor: ElementInteractorImpl): ElementInteractor =
         interactor
 
-    @Singleton
     @Provides
-    fun provideElementViewModel(roomRepository: ElementInteractorImpl): ElementViewModel =
-        ElementViewModel(roomRepository)
-
-
+    fun provideElementViewModel(interactor: ElementInteractorImpl): ElementViewModel =
+        ElementViewModel(interactor)
 }

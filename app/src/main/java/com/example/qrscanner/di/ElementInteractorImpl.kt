@@ -9,6 +9,7 @@ import javax.inject.Inject
 class ElementInteractorImpl @Inject constructor(
     private val elementDao: ElementDao
 ): ElementInteractor {
+
     override suspend fun getAll(): List<ElementEntity> =
         withContext(Dispatchers.IO) {
             elementDao.getAll()

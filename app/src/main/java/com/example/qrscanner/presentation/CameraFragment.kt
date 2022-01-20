@@ -21,14 +21,15 @@ import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.qrscanner.DaggerApplication
 import com.example.qrscanner.R
 import com.example.qrscanner.databinding.FragmentCameraBinding
 import com.example.qrscanner.domain.ElementViewModel
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
+import javax.inject.Inject
 
 private const val CAMERA_REQUEST_CODE = 10000001
 private const val GALLERY_REQUEST_CODE = 20000002
@@ -36,10 +37,11 @@ private const val GALLERY_REQUEST_CODE = 20000002
 class CameraFragment : Fragment() {
 
     init {
-        com.example.qrscanner.DaggerApplication.appComponent?.inject(this)
+        DaggerApplication.appComponent?.inject(this)
     }
 
-    private val viewModel: ElementViewModel by viewModels()
+    @Inject
+    lateinit var viewModel: ElementViewModel
 
     private lateinit var binding: FragmentCameraBinding
     private val btnCamera: Button by lazy { binding.btnCamera }
@@ -89,7 +91,7 @@ class CameraFragment : Fragment() {
         super.onStart()
 
         viewModel.getAll()
-        Log.d("!!!!!", "onStart: ${viewModel.element.value?.size}")
+        Log.d("!!!!!", "onStart: ${viewModel.element.value}")
 
         btnCamera.setOnClickListener {
             goCamera()

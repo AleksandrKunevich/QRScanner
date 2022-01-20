@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.core.util.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.qrscanner.DaggerApplication
 import com.example.qrscanner.R
 import com.example.qrscanner.databinding.FragmentScannerBinding
 import com.google.android.gms.vision.Frame
@@ -19,6 +20,10 @@ import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 
 class ScannerFragment : Fragment() {
+
+    init {
+        DaggerApplication.appComponent?.inject(this)
+    }
 
     private lateinit var binding: FragmentScannerBinding
     private lateinit var imageView: ImageView
@@ -43,7 +48,6 @@ class ScannerFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
 
         val myBitmap = BitmapFactory.decodeResource(
             requireContext().resources,

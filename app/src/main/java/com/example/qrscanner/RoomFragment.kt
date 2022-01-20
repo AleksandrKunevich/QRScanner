@@ -27,7 +27,6 @@ class RoomFragment : Fragment() {
         super.onStart()
 
         btnLoad.setOnClickListener {
-
         }
     }
 }

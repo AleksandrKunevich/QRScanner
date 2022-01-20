@@ -18,10 +18,11 @@ interface ApplicationComponent {
 
     @Component.Builder
     interface Builder {
-        @BindsInstance
-        fun bindContext(context: Context): Builder
 
         fun build(): ApplicationComponent
+
+        @BindsInstance
+        fun bindContext(context: Context): Builder
     }
 
     fun inject(target: RoomFragment)

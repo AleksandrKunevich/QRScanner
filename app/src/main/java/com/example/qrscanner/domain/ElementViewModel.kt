@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.qrscanner.di.ElementInteractorImpl
+import com.example.qrscanner.di.ElementInteractor
 import com.example.qrscanner.storage.ElementEntity
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ElementViewModel @Inject constructor(
-    private val roomRepository: ElementInteractorImpl
+    private val roomRepository: ElementInteractor
 ) : ViewModel() {
 
     private val _element = MutableLiveData<List<ElementEntity>>()
@@ -19,6 +19,18 @@ class ElementViewModel @Inject constructor(
     fun getAll() {
         viewModelScope.launch {
             _element.value = roomRepository.getAll()
+        }
+    }
+
+    fun inset(element: ElementEntity) {
+        viewModelScope.launch {
+            roomRepository.insertEntity(element)
+        }
+    }
+
+    fun delete(element: ElementEntity) {
+        viewModelScope.launch {
+            roomRepository.deleteEntity(element)
         }
     }
 }
