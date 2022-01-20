@@ -1,6 +1,5 @@
 package com.example.qrscanner.presentation
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -9,9 +8,9 @@ import android.util.SparseArray
 import android.view.*
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.app.ActivityCompat
 import androidx.core.util.isNotEmpty
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.qrscanner.R
 import com.example.qrscanner.databinding.RealtimeScannerBinding
 import com.example.qrscanner.utils.SaveBitmap
@@ -20,12 +19,12 @@ import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 
-private const val CODE_CAMERA = 10000001
-
 class RealtimeScannerFragment : Fragment() {
 
     private val surfaceView: SurfaceView by lazy { binding.surfaceView }
     private val btnTakePicture: Button by lazy { binding.btnTakePicture }
+    private val btnRoom: Button by lazy { binding.btnRoom }
+    private val btnCamera: Button by lazy { binding.btnCamera }
     private val txtValue: TextView by lazy { binding.txtValue }
     private lateinit var binding: RealtimeScannerBinding
     private lateinit var detector: BarcodeDetector
@@ -45,6 +44,12 @@ class RealtimeScannerFragment : Fragment() {
         super.onStart()
         btnTakePicture.setOnClickListener {
             takeImage()
+        }
+        btnRoom.setOnClickListener {
+            findNavController().navigate(R.id.action_realtimeScannerFragment_to_roomFragment)
+        }
+        btnCamera.setOnClickListener {
+            findNavController().navigate(R.id.action_realtimeScannerFragment_to_cameraFragment)
         }
     }
 
@@ -86,14 +91,6 @@ class RealtimeScannerFragment : Fragment() {
             CameraSource.Builder(context, detector).setAutoFocusEnabled(true).build()
         surfaceView.holder.addCallback(surfaceCallBack)
         detector.setProcessor(processor)
-    }
-
-    private fun askForCameraPermission() {
-        ActivityCompat.requestPermissions(
-            requireActivity(),
-            arrayOf(Manifest.permission.CAMERA),
-            CODE_CAMERA
-        )
     }
 
     private fun takeImage() {

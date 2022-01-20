@@ -38,7 +38,14 @@
         android:id="@+id/realtimeScannerFragment"
         android:name="com.example.qrscanner.presentation.RealtimeScannerFragment"
         android:label="realtime_scanner"
-        tools:layout="@layout/realtime_scanner" />
+        tools:layout="@layout/realtime_scanner" >
+        <action
+            android:id="@+id/action_realtimeScannerFragment_to_roomFragment"
+            app:destination="@id/roomFragment" />
+        <action
+            android:id="@+id/action_realtimeScannerFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
     <fragment
         android:id="@+id/permissionsFragment"
         android:name="com.example.qrscanner.presentation.PermissionsFragment"

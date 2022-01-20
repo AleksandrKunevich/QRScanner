@@ -38,7 +38,7 @@ class ScannerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentScannerBinding.inflate(inflater, container, false)
-        imageView = binding.imgView
+        imageView = binding.imgScanner
         txtView = binding.txtContent
         btnScan = binding.btnScan
         btnCamera = binding.btnCamera
