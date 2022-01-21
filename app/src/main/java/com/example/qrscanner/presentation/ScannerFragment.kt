@@ -60,11 +60,13 @@ class ScannerFragment : Fragment() {
         var myBitmap: Bitmap =
             BitmapFactory.decodeResource(requireContext().resources, R.drawable.img)
         viewModel.element.observe(this) { elementList ->
-            val position = arguments!!.getInt(POSITION_CODE)
-            if (position != -1) {
-                if (elementList.size > position) {
-                    myBitmap = elementList[position].bitmap
-                    imageView.setImageBitmap(myBitmap)
+            arguments?.let {
+                val position = it.getInt(POSITION_CODE)
+                if (position != -1) {
+                    if (elementList.size > position) {
+                        myBitmap = elementList[position].bitmap
+                        imageView.setImageBitmap(myBitmap)
+                    }
                 }
             }
         }

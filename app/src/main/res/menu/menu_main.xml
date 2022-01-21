@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menuCamera"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:orderInCategory="100"
+        android:title="@string/camera"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menuRealtime"
+        android:icon="@android:drawable/ic_menu_week"
+        android:orderInCategory="100"
+        android:title="@string/realtime"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menuRoom"
+        android:icon="@android:drawable/ic_menu_rotate"
+        android:orderInCategory="100"
+        android:title="@string/room"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menuScan"
+        android:icon="@android:drawable/ic_menu_search"
+        android:orderInCategory="100"
+        android:title="@string/scan"
+        app:showAsAction="never" />
+</menu>

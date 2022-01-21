@@ -48,6 +48,9 @@
         <action
             android:id="@+id/action_roomFragment_to_realtimeScannerFragment"
             app:destination="@id/realtimeScannerFragment" />
+        <action
+            android:id="@+id/action_roomFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
     </fragment>
     <fragment
         android:id="@+id/realtimeScannerFragment"

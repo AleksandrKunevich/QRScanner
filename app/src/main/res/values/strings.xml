@@ -11,4 +11,5 @@
     <string name="realtime">real time</string>
     <string name="load">Load</string>
     <string name="not_scanning">Not scanning</string>
+    <string name="menu">Menu</string>
 </resources>

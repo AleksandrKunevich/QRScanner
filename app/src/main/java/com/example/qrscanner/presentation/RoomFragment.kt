@@ -6,10 +6,9 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore.Images
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -22,7 +21,6 @@ import com.example.qrscanner.presentation.recycler.ElementAdapter
 import com.example.qrscanner.presentation.recycler.ElementClickListener
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
-
 
 private const val POSITION_CODE = "POSITION_CODE"
 
@@ -90,5 +88,42 @@ class RoomFragment : Fragment() {
             recyclerElement.layoutManager = LinearLayoutManager(activity)
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menuCamera -> {
+                findNavController().navigate(R.id.action_roomFragment_to_cameraFragment)
+                return true
+            }
+            R.id.menuScan -> {
+                findNavController().navigate(R.id.action_roomFragment_to_scannerFragment)
+                return true
+            }
+            R.id.menuRealtime -> {
+                findNavController().navigate(R.id.action_roomFragment_to_realtimeScannerFragment)
+                return true
+            }
+            R.id.menuRoom -> {
+                val toast =
+                    Toast.makeText(requireContext(), "You are in the Room!", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
+                return true
+            }
+            else -> {
+                return super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 }
