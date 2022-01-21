@@ -1,14 +1,15 @@
 <resources>
     <string name="app_name">QRScanner</string>
     <string name="scan">Scan</string>
+    <string name="delete">Delete</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="camera">camera</string>
-    <string name="take_picture">take picture</string>
+    <string name="camera">Camera</string>
+    <string name="take_picture">Take picture</string>
     <string name="scanning">Scanning...</string>
-    <string name="room">room</string>
+    <string name="room">Room</string>
     <string name="empty">Empty...</string>
-    <string name="realtime">real time</string>
+    <string name="realtime">Realtime</string>
     <string name="load">Load</string>
     <string name="not_scanning">Not scanning</string>
     <string name="menu">Menu</string>

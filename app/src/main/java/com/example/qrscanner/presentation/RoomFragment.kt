@@ -19,6 +19,7 @@ import com.example.qrscanner.databinding.FragmentRoomBinding
 import com.example.qrscanner.domain.ElementViewModel
 import com.example.qrscanner.presentation.recycler.ElementAdapter
 import com.example.qrscanner.presentation.recycler.ElementClickListener
+import com.example.qrscanner.storage.ElementEntity
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
@@ -48,6 +49,10 @@ class RoomFragment : Fragment() {
             intent.putExtra(Intent.EXTRA_STREAM, getImageUri(requireContext(), bitmap))
             intent.type = "image/*"
             startActivity(Intent.createChooser(intent, "Open image..."))
+        }
+
+        override fun onImageDeleteClickListener(elementEntity: ElementEntity) {
+            viewModel.delete(elementEntity)
         }
     }
 

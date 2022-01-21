@@ -1,5 +1,6 @@
 package com.example.qrscanner.presentation.recycler
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,10 +32,12 @@ class ElementHolder private constructor(
     private val txtCount: TextView by lazy { itemView.findViewById(R.id.txtCount) }
     private val txtDate: TextView by lazy { itemView.findViewById(R.id.txtDate) }
     private val txtTime: TextView by lazy { itemView.findViewById(R.id.txtTime) }
+    private val imgDelete: ImageView by lazy { itemView.findViewById(R.id.imgDelete) }
 
+    @SuppressLint("SetTextI18n")
     fun bindView(item: ElementEntity) {
         image.setImageBitmap(item.bitmap)
-        txtCount.text = (adapterPosition + 1).toString()
+        txtCount.text = "Go scan ${item.uid}"
         txtDate.text = item.date.toString()
         txtTime.text = item.time.toString()
 
@@ -44,6 +47,10 @@ class ElementHolder private constructor(
 
         image.setOnClickListener {
             listener.onImageClickListener(item.bitmap)
+        }
+
+        imgDelete.setOnClickListener {
+            listener.onImageDeleteClickListener(item)
         }
     }
 }

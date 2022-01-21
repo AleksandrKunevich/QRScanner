@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.drawToBitmap
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.qrscanner.DaggerApplication
@@ -62,17 +63,19 @@ class CameraFragment : Fragment() {
             findNavController().navigate(R.id.action_cameraFragment_to_realtimeScannerFragment)
         }
 
-        imgView.setOnClickListener {
+        imgView.setOnClickListener { image ->
             val pictureDialog = AlertDialog.Builder(requireContext())
             pictureDialog.setTitle("Select Action")
             val pictureDialogItem = arrayOf(
                 "Select photo from Gallery",
-                "Capture photo from Camera"
+                "Capture photo from Camera",
+                "Add photo to Room"
             )
             pictureDialog.setItems(pictureDialogItem) { dialog, which ->
                 when (which) {
                     0 -> goGallery()
                     1 -> goCamera()
+                    2 -> goRoom(image)
                 }
             }
             pictureDialog.show()
@@ -109,5 +112,9 @@ class CameraFragment : Fragment() {
     private fun goCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(intent, CAMERA_REQUEST_CODE)
+    }
+
+    private fun goRoom(image: View) {
+        saveBitmap.saveBitmapInStorage(image.drawToBitmap(), requireActivity())
     }
 }

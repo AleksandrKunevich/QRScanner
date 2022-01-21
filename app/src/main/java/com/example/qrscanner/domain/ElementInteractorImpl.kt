@@ -22,6 +22,6 @@ class ElementInteractorImpl @Inject constructor(
 
     override suspend fun deleteEntity(elementEntity: ElementEntity) =
         withContext(Dispatchers.IO) {
-            elementDao.insertEntity(elementEntity)
+            elementDao.deleteEntity(elementEntity)
         }
 }
