@@ -38,8 +38,12 @@ class ElementHolder private constructor(
         txtDate.text = item.date.toString()
         txtTime.text = item.time.toString()
 
-        image.setOnClickListener {
+        txtCount.setOnClickListener {
             listener.onItemClickListener(adapterPosition)
+        }
+
+        image.setOnClickListener {
+            listener.onImageClickListener(item.bitmap)
         }
     }
 }

@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_scanner" >
         <action
             android:id="@+id/action_scannerFragment_to_cameraFragment"
-            app:destination="@id/cameraFragment" />
+            app:destination="@id/cameraFragment"
+            />
         <action
             android:id="@+id/action_scannerFragment_to_roomFragment"
             app:destination="@id/roomFragment" />
