@@ -2,6 +2,8 @@ package com.example.qrscanner.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.qrscanner.domain.ElementInteractor
+import com.example.qrscanner.domain.ElementInteractorImpl
 import com.example.qrscanner.domain.ElementViewModel
 import com.example.qrscanner.storage.AppDataBaseRoom
 import com.example.qrscanner.storage.ElementDao

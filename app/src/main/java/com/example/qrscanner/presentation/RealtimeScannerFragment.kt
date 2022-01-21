@@ -11,15 +11,24 @@ import android.widget.TextView
 import androidx.core.util.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.qrscanner.DaggerApplication
 import com.example.qrscanner.R
 import com.example.qrscanner.databinding.RealtimeScannerBinding
-import com.example.qrscanner.utils.SaveBitmap
+import com.example.qrscanner.utils.SaveBitmapImpl
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
+import javax.inject.Inject
 
 class RealtimeScannerFragment : Fragment() {
+
+    init {
+        DaggerApplication.appComponent?.inject(this)
+    }
+
+    @Inject
+    lateinit var saveBitmap: SaveBitmapImpl
 
     private val surfaceView: SurfaceView by lazy { binding.surfaceView }
     private val btnTakePicture: Button by lazy { binding.btnTakePicture }
@@ -36,7 +45,7 @@ class RealtimeScannerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = RealtimeScannerBinding.inflate(inflater, container, false)
-        setupControls()
+        initCamera()
         return binding.root
     }
 
@@ -85,7 +94,7 @@ class RealtimeScannerFragment : Fragment() {
         }
     }
 
-    private fun setupControls() {
+    private fun initCamera() {
         detector = BarcodeDetector.Builder(context).build()
         cameraSource =
             CameraSource.Builder(context, detector).setAutoFocusEnabled(true).build()
@@ -96,7 +105,7 @@ class RealtimeScannerFragment : Fragment() {
     private fun takeImage() {
         cameraSource.takePicture(null, { bytes ->
             val bitmap: Bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-            SaveBitmap().saveBitmapInStorage(bitmap, requireContext())
+            saveBitmap.saveBitmapInStorage(bitmap, requireContext())
         })
     }
 }

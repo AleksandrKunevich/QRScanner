@@ -1,17 +1,18 @@
-package com.example.qrscanner.di
+package com.example.qrscanner
 
 import android.content.Context
-import com.example.qrscanner.presentation.RoomFragment
-import com.example.qrscanner.presentation.CameraFragment
-import com.example.qrscanner.presentation.MainActivity
-import com.example.qrscanner.presentation.ScannerFragment
+import com.example.qrscanner.di.RoomModule
+import com.example.qrscanner.presentation.*
 import com.example.qrscanner.utils.SaveBitmap
+import com.example.qrscanner.utils.SaveBitmapImpl
+import com.example.qrscanner.utils.di.SaveBitmapModule
 import dagger.BindsInstance
 import dagger.Component
 
 @Component(
     modules = [
-        RoomModule::class
+        RoomModule::class,
+        SaveBitmapModule::class
     ]
 )
 
@@ -31,5 +32,7 @@ interface ApplicationComponent {
     fun inject(target: ScannerFragment)
     fun inject(target: MainActivity)
     fun inject(target: SaveBitmap)
+    fun inject(target: RealtimeScannerFragment)
+    fun inject(target: SaveBitmapImpl)
 
 }

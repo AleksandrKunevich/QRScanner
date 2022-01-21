@@ -1,4 +1,4 @@
-package com.example.qrscanner.di
+package com.example.qrscanner.domain
 
 import com.example.qrscanner.storage.ElementDao
 import com.example.qrscanner.storage.ElementEntity
@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class ElementInteractorImpl @Inject constructor(
     private val elementDao: ElementDao
-): ElementInteractor {
+) : ElementInteractor {
 
     override suspend fun getAll(): List<ElementEntity> =
         withContext(Dispatchers.IO) {

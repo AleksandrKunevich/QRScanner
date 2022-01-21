@@ -1,4 +1,4 @@
-package com.example.qrscanner.di
+package com.example.qrscanner.domain
 
 import com.example.qrscanner.storage.ElementEntity
 

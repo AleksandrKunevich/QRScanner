@@ -13,14 +13,23 @@ import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.qrscanner.DaggerApplication
 import com.example.qrscanner.R
 import com.example.qrscanner.databinding.FragmentCameraBinding
-import com.example.qrscanner.utils.SaveBitmap
+import com.example.qrscanner.utils.SaveBitmapImpl
+import javax.inject.Inject
 
 private const val CAMERA_REQUEST_CODE = 10000001
 private const val GALLERY_REQUEST_CODE = 20000002
 
 class CameraFragment : Fragment() {
+
+    init {
+        DaggerApplication.appComponent?.inject(this)
+    }
+
+    @Inject
+    lateinit var saveBitmap: SaveBitmapImpl
 
     private lateinit var binding: FragmentCameraBinding
     private val btnCamera: Button by lazy { binding.btnCamera }
@@ -81,7 +90,7 @@ class CameraFragment : Fragment() {
             when (requestCode) {
                 CAMERA_REQUEST_CODE -> {
                     val bitmap = data?.extras?.get("data") as Bitmap
-                    SaveBitmap().saveBitmapInStorage(bitmap, requireContext())
+                    saveBitmap.saveBitmapInStorage(bitmap, requireContext())
                     binding.imageView.setImageBitmap(bitmap)
                 }
                 GALLERY_REQUEST_CODE -> {
