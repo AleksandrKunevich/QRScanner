@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.qrscanner.R
 import com.example.qrscanner.data.storage.ElementEntity
+import com.example.qrscanner.domain.ElementQR
 
 class ElementHolder private constructor(
     itemView: View,
@@ -35,7 +36,7 @@ class ElementHolder private constructor(
     private val imgDelete: ImageView by lazy { itemView.findViewById(R.id.imgDelete) }
 
     @SuppressLint("SetTextI18n")
-    fun bindView(item: ElementEntity) {
+    fun bindView(item: ElementQR) {
         image.setImageBitmap(item.bitmap)
         txtCount.text = "Go scan ${item.uid}"
         txtDate.text = item.date.toString()

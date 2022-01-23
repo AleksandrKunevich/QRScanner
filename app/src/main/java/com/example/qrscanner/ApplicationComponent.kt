@@ -5,7 +5,7 @@ import com.example.qrscanner.data.storage.di.RoomModule
 import com.example.qrscanner.domain.di.SaveBitmapModule
 import com.example.qrscanner.domain.di.ViewModelModule
 import com.example.qrscanner.presentation.*
-import com.example.qrscanner.domain.utils.SaveBitmapImpl
+import com.example.qrscanner.data.SaveBitmapImpl
 import dagger.BindsInstance
 import dagger.Component
 

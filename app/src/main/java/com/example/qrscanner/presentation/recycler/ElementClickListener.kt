@@ -1,7 +1,7 @@
 package com.example.qrscanner.presentation.recycler
 
 import android.graphics.Bitmap
-import com.example.qrscanner.data.storage.ElementEntity
+import com.example.qrscanner.domain.ElementQR
 
 interface ElementClickListener {
 
@@ -9,5 +9,5 @@ interface ElementClickListener {
 
     fun onImageClickListener(bitmap: Bitmap)
 
-    fun onImageDeleteClickListener(elementEntity: ElementEntity)
+    fun onImageDeleteClickListener(elementQR: ElementQR)
 }

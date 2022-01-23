@@ -4,11 +4,12 @@ import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.qrscanner.data.storage.ElementEntity
+import com.example.qrscanner.domain.ElementQR
 
 class ElementAdapter(private val listener: ElementClickListener) :
     RecyclerView.Adapter<ElementHolder>() {
 
-    private var items: List<ElementEntity> = emptyList()
+    private var items: List<ElementQR> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ElementHolder {
         return ElementHolder.from(parent, listener)
@@ -23,7 +24,7 @@ class ElementAdapter(private val listener: ElementClickListener) :
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitList(data: List<ElementEntity>) {
+    fun submitList(data: List<ElementQR>) {
         items = data
         notifyDataSetChanged()
     }

@@ -4,9 +4,9 @@ import com.example.qrscanner.data.storage.ElementEntity
 
 interface ElementInteractor {
 
-    suspend fun getAll(): List<ElementEntity>
+    suspend fun getAll(): List<ElementQR>
 
-    suspend fun insertEntity(elementEntity: ElementEntity)
+    suspend fun insert(elementEntity: ElementQR)
 
-    suspend fun deleteEntity(elementEntity: ElementEntity)
+    suspend fun delete(elementEntity: ElementQR)
 }

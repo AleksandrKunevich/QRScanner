@@ -1,4 +1,4 @@
-package com.example.qrscanner.domain.utils
+package com.example.qrscanner.data
 
 import android.content.ContentValues
 import android.content.Context
@@ -9,8 +9,10 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Toast
 import com.example.qrscanner.DaggerApplication
-import com.example.qrscanner.domain.ElementViewModel
 import com.example.qrscanner.data.storage.ElementEntity
+import com.example.qrscanner.domain.ElementQR
+import com.example.qrscanner.domain.ElementViewModel
+import com.example.qrscanner.domain.utils.SaveBitmapInterface
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -51,7 +53,7 @@ class SaveBitmapImpl @Inject constructor() : SaveBitmapInterface {
         }
 
         viewModel.inset(
-            ElementEntity(
+            ElementQR(
                 UUID.randomUUID(),
                 bitmap,
                 Date(),

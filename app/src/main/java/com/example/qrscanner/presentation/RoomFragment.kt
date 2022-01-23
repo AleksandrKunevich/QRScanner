@@ -16,10 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.qrscanner.DaggerApplication
 import com.example.qrscanner.R
 import com.example.qrscanner.databinding.FragmentRoomBinding
+import com.example.qrscanner.domain.ElementQR
 import com.example.qrscanner.domain.ElementViewModel
 import com.example.qrscanner.presentation.recycler.ElementAdapter
 import com.example.qrscanner.presentation.recycler.ElementClickListener
-import com.example.qrscanner.data.storage.ElementEntity
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
@@ -51,8 +51,8 @@ class RoomFragment : Fragment() {
             startActivity(Intent.createChooser(intent, "Open image..."))
         }
 
-        override fun onImageDeleteClickListener(elementEntity: ElementEntity) {
-            viewModel.delete(elementEntity)
+        override fun onImageDeleteClickListener(elementQR: ElementQR) {
+            viewModel.delete(elementQR)
         }
     }
 
