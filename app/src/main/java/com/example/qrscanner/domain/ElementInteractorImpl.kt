@@ -1,7 +1,7 @@
 package com.example.qrscanner.domain
 
-import com.example.qrscanner.storage.ElementDao
-import com.example.qrscanner.storage.ElementEntity
+import com.example.qrscanner.data.storage.ElementDao
+import com.example.qrscanner.data.storage.ElementEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -24,4 +24,5 @@ class ElementInteractorImpl @Inject constructor(
         withContext(Dispatchers.IO) {
             elementDao.deleteEntity(elementEntity)
         }
+
 }

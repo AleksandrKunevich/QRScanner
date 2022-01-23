@@ -1,11 +1,11 @@
-package com.example.qrscanner.storage
+package com.example.qrscanner.data.storage
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.qrscanner.storage.utils.BitMapConverter
-import com.example.qrscanner.storage.utils.DateConverter
-import com.example.qrscanner.storage.utils.UUIDConverter
+import com.example.qrscanner.data.storage.utils.BitMapConverter
+import com.example.qrscanner.data.storage.utils.DateConverter
+import com.example.qrscanner.data.storage.utils.UUIDConverter
 
 @Database(
     entities = [ElementEntity::class],

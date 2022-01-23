@@ -1,7 +1,7 @@
-package com.example.qrscanner.utils.di
+package com.example.qrscanner.domain.di
 
-import com.example.qrscanner.utils.SaveBitmapImpl
-import com.example.qrscanner.utils.SaveBitmapInterface
+import com.example.qrscanner.domain.utils.SaveBitmapImpl
+import com.example.qrscanner.domain.utils.SaveBitmapInterface
 import dagger.Module
 import dagger.Provides
 

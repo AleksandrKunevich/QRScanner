@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.qrscanner.storage.ElementEntity
+import com.example.qrscanner.data.storage.ElementEntity
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

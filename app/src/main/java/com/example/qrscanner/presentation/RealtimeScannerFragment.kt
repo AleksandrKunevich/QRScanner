@@ -14,11 +14,15 @@ import androidx.navigation.fragment.findNavController
 import com.example.qrscanner.DaggerApplication
 import com.example.qrscanner.R
 import com.example.qrscanner.databinding.RealtimeScannerBinding
-import com.example.qrscanner.utils.SaveBitmapImpl
+import com.example.qrscanner.domain.utils.SaveBitmapImpl
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RealtimeScannerFragment : Fragment() {
@@ -103,9 +107,11 @@ class RealtimeScannerFragment : Fragment() {
     }
 
     private fun takeImage() {
-        cameraSource.takePicture(null, { bytes ->
-            val bitmap: Bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-            saveBitmap.saveBitmapInStorage(bitmap, requireContext())
-        })
+        CoroutineScope(Dispatchers.IO).launch {
+            cameraSource.takePicture(null, { bytes ->
+                val bitmap: Bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                saveBitmap.saveBitmapInStorage(bitmap, requireContext())
+            })
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.qrscanner.storage.utils
+package com.example.qrscanner.data.storage.utils
 
 import androidx.room.TypeConverter
 import java.util.*

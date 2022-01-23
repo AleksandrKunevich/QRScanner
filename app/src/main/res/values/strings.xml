@@ -9,6 +9,7 @@
     <string name="scanning">Scanning...</string>
     <string name="room">Room</string>
     <string name="empty">Empty...</string>
+    <string name="empty_barcode">Empty barcode...</string>
     <string name="realtime">Realtime</string>
     <string name="load">Load</string>
     <string name="not_scanning">Not scanning</string>

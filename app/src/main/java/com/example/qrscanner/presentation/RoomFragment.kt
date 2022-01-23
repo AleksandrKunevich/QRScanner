@@ -19,7 +19,7 @@ import com.example.qrscanner.databinding.FragmentRoomBinding
 import com.example.qrscanner.domain.ElementViewModel
 import com.example.qrscanner.presentation.recycler.ElementAdapter
 import com.example.qrscanner.presentation.recycler.ElementClickListener
-import com.example.qrscanner.storage.ElementEntity
+import com.example.qrscanner.data.storage.ElementEntity
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 

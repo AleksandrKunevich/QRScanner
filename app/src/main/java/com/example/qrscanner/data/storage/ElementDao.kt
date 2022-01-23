@@ -1,4 +1,4 @@
-package com.example.qrscanner.storage
+package com.example.qrscanner.data.storage
 
 import androidx.room.*
 

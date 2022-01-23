@@ -1,4 +1,4 @@
-package com.example.qrscanner.utils
+package com.example.qrscanner.domain.utils
 
 import android.content.ContentValues
 import android.content.Context
@@ -10,7 +10,7 @@ import android.provider.MediaStore
 import android.widget.Toast
 import com.example.qrscanner.DaggerApplication
 import com.example.qrscanner.domain.ElementViewModel
-import com.example.qrscanner.storage.ElementEntity
+import com.example.qrscanner.data.storage.ElementEntity
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream

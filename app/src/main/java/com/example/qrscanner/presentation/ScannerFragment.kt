@@ -83,8 +83,8 @@ class ScannerFragment : Fragment() {
             val frame = Frame.Builder().setBitmap(myBitmap).build();
             val barcodes: SparseArray<Barcode> = barcodeDetector.detect(frame);
             if (barcodes.isNotEmpty()) {
-                val thisCode = barcodes.valueAt(0)
-                txtView.text = thisCode?.displayValue ?: resources.getString(R.string.empty)
+                val thisCode: Barcode = barcodes.valueAt(0)
+                txtView.text = thisCode.displayValue ?: resources.getString(R.string.empty_barcode)
             }
         }
 

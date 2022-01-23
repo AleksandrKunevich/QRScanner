@@ -17,7 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.qrscanner.DaggerApplication
 import com.example.qrscanner.R
 import com.example.qrscanner.databinding.FragmentCameraBinding
-import com.example.qrscanner.utils.SaveBitmapImpl
+import com.example.qrscanner.domain.utils.SaveBitmapImpl
 import javax.inject.Inject
 
 private const val CAMERA_REQUEST_CODE = 10000001

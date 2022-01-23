@@ -1,6 +1,6 @@
 package com.example.qrscanner.domain
 
-import com.example.qrscanner.storage.ElementEntity
+import com.example.qrscanner.data.storage.ElementEntity
 
 interface ElementInteractor {
 

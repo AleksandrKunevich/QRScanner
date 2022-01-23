@@ -1,7 +1,7 @@
 package com.example.qrscanner.presentation.recycler
 
 import android.graphics.Bitmap
-import com.example.qrscanner.storage.ElementEntity
+import com.example.qrscanner.data.storage.ElementEntity
 
 interface ElementClickListener {
 

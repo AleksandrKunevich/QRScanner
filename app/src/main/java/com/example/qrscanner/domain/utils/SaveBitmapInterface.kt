@@ -1,4 +1,4 @@
-package com.example.qrscanner.utils
+package com.example.qrscanner.domain.utils
 
 import android.content.Context
 import android.graphics.Bitmap

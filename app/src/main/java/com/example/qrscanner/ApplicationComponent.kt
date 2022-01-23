@@ -1,18 +1,21 @@
 package com.example.qrscanner
 
 import android.content.Context
-import com.example.qrscanner.di.RoomModule
+import com.example.qrscanner.data.storage.di.RoomModule
+import com.example.qrscanner.domain.di.SaveBitmapModule
+import com.example.qrscanner.domain.di.ViewModelModule
 import com.example.qrscanner.presentation.*
-import com.example.qrscanner.utils.SaveBitmap
-import com.example.qrscanner.utils.SaveBitmapImpl
-import com.example.qrscanner.utils.di.SaveBitmapModule
+import com.example.qrscanner.domain.utils.SaveBitmap
+import com.example.qrscanner.domain.utils.SaveBitmapImpl
 import dagger.BindsInstance
 import dagger.Component
 
 @Component(
     modules = [
         RoomModule::class,
-        SaveBitmapModule::class
+        SaveBitmapModule::class,
+        ViewModelModule::class
+
     ]
 )
 

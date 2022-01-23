@@ -1,12 +1,12 @@
-package com.example.qrscanner.di
+package com.example.qrscanner.data.storage.di
 
 import android.content.Context
 import androidx.room.Room
 import com.example.qrscanner.domain.ElementInteractor
 import com.example.qrscanner.domain.ElementInteractorImpl
 import com.example.qrscanner.domain.ElementViewModel
-import com.example.qrscanner.storage.AppDataBaseRoom
-import com.example.qrscanner.storage.ElementDao
+import com.example.qrscanner.data.storage.AppDataBaseRoom
+import com.example.qrscanner.data.storage.ElementDao
 import dagger.Module
 import dagger.Provides
 
@@ -28,8 +28,4 @@ object RoomModule {
     @Provides
     fun provideElementInteractorImpl(interactor: ElementInteractorImpl): ElementInteractor =
         interactor
-
-    @Provides
-    fun provideElementViewModel(interactor: ElementInteractorImpl): ElementViewModel =
-        ElementViewModel(interactor)
 }

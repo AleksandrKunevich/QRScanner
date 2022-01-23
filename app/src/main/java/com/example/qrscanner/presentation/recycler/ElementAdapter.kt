@@ -1,8 +1,9 @@
 package com.example.qrscanner.presentation.recycler
 
+import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.qrscanner.storage.ElementEntity
+import com.example.qrscanner.data.storage.ElementEntity
 
 class ElementAdapter(private val listener: ElementClickListener) :
     RecyclerView.Adapter<ElementHolder>() {
@@ -21,6 +22,7 @@ class ElementAdapter(private val listener: ElementClickListener) :
         return items.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun submitList(data: List<ElementEntity>) {
         items = data
         notifyDataSetChanged()
