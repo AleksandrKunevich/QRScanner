@@ -5,7 +5,6 @@ import com.example.qrscanner.data.storage.di.RoomModule
 import com.example.qrscanner.domain.di.SaveBitmapModule
 import com.example.qrscanner.domain.di.ViewModelModule
 import com.example.qrscanner.presentation.*
-import com.example.qrscanner.domain.utils.SaveBitmap
 import com.example.qrscanner.domain.utils.SaveBitmapImpl
 import dagger.BindsInstance
 import dagger.Component
@@ -34,7 +33,6 @@ interface ApplicationComponent {
     fun inject(target: CameraFragment)
     fun inject(target: ScannerFragment)
     fun inject(target: MainActivity)
-    fun inject(target: SaveBitmap)
     fun inject(target: RealtimeScannerFragment)
     fun inject(target: SaveBitmapImpl)
 
